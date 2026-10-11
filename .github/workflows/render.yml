@@ -1,0 +1,65 @@
+name: render-carousels
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'runs/*/carousel.json'
+      - 'templates/**'
+      - 'src/**'
+      - 'brand.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: System deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright-core install --with-deps chromium
+          npm run setup
+
+      # Renderuje kazdy przebieg, ktory nie ma jeszcze znacznika DONE. Gdy kontrola jakosci (qa) nie przejdzie,
+      # krok sie przerywa i media nie trafiaja do repo, wiec nie da sie ich opublikowac.
+      - name: Render runs without media
+        run: |
+          set -e
+          for d in runs/*/; do
+            id=$(basename "$d")
+            [ -f "runs/$id/carousel.json" ] || continue
+            if [ -f "media/$id/DONE" ]; then continue; fi
+            node src/render.mjs "$id"
+            node src/qa.mjs "$id"
+            mkdir -p "media/$id"
+            cp runs/$id/out/slide-* "media/$id/"
+            cp runs/$id/out/contact.jpg "media/$id/contact.jpg"
+            date -u +%FT%TZ > "media/$id/DONE"
+          done
+
+      - name: Commit media
+        run: |
+          git config user.name "carousel-bot"
+          git config user.email "carousel-bot@users.noreply.github.com"
+          git add media
+          git diff --cached --quiet || git commit -m "Render mediow"
+          git push
