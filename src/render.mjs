@@ -1,5 +1,5 @@
 // Uzycie: node src/render.mjs <run-id> [--only=2,3]
-// Etapy: stills (PNG dla cover i cta) oraz videos (MP4 dla slajdow typu tool). Kazdy gotowy plik jest pomijany przy wznowieniu.
+// Etapy: stills (PNG dla cover i cta) oraz videos (MP4 dla slajdow typu tool i hook). Kazdy gotowy plik jest pomijany przy wznowieniu.
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -46,7 +46,7 @@ try {
 
   for (const slide of carousel.slides) {
     if (only && !only.includes(slide.n)) continue;
-    const isVideo = slide.type === 'tool';
+    const isVideo = slide.type === 'tool' || slide.type === 'hook'; // hook = tytul karuzeli + pierwsze narzedzie (animowany)
     const file = path.join(outDir, `slide-${pad(slide.n)}.${isVideo ? 'mp4' : 'png'}`);
     const stage = isVideo ? 'videos' : 'stills';
     if (isVideo ? validVideo(file) : validPng(file)) {
