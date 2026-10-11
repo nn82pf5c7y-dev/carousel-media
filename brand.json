@@ -1,0 +1,20 @@
+{
+  "name": "The Kind Concrete",
+  "handle": "@thekindconcrete",
+  "byline": "thekindconcrete.com",
+  "alt_signature": "Created by Pawel Grzywaczewski thekindconcrete.com",
+  "lang": "en",
+  "colors": {
+    "bg": "#0B1320",
+    "bg2": "#142038",
+    "ink": "#FFFFFF",
+    "body": "#D5DCEA",
+    "muted": "#8E9BB3",
+    "accent": "#F5A524",
+    "panel": "#16233A",
+    "panelLine": "#2C4066",
+    "line": "#26364F"
+  },
+  "video": { "fps": 24, "seconds": 8, "width": 1080, "height": 1350 },
+  "note": "Kolory wzorowane na opisie dotychczasowej serii (ciemny granat, antracyt, bursztyn). Podmien hex-y, gdy bedzie brandbook."
+}

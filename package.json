@@ -1,0 +1,17 @@
+{
+  "name": "carousel-media",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Renderer karuzel na Instagram: HTML do PNG i MP4, kontrola jakosci.",
+  "scripts": {
+    "setup": "node src/setup.mjs",
+    "render": "node src/render.mjs",
+    "qa": "node src/qa.mjs"
+  },
+  "dependencies": {
+    "@fontsource/anton": "5.2.5",
+    "@fontsource/inter": "5.2.5",
+    "playwright-core": "1.56.0"
+  }
+}

@@ -1,0 +1,5 @@
+node_modules/
+fonts/
+runs/*/out/
+runs/*/.tmp/
+runs/*/state.json
