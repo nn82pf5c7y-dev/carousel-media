@@ -254,5 +254,122 @@
     },
   };
 
+  /* ---------- 6. CRM: karta przechodzi przez lejek ---------- */
+  S.pipeline = {
+    init(root) {
+      const r = {};
+      const names = ['Lead', 'Proposal', 'Won'];
+      const xs = [25, 325, 625];
+      xs.forEach((x, i) => {
+        const c = el('div', null, root, px({ left: x, top: 40, width: 270, height: 410, borderRadius: 20, border: '2px solid ' + css('--panelLine'), background: '#16233A' }));
+        el('div', null, c, px({ left: 22, top: 20, fontSize: 18, fontWeight: 700, letterSpacing: '.16em', color: css('--muted'), textTransform: 'uppercase' }), names[i]);
+      });
+      const ghost = (x, y) => {
+        const g = el('div', null, root, px({ left: x, top: y, width: 230, height: 84, borderRadius: 14, border: '2px solid ' + css('--panelLine'), background: '#1b2a45', opacity: 0.55 }));
+        el('div', null, g, px({ left: 16, top: 18, width: 120, height: 14, borderRadius: 7, background: '#32476c' }));
+        el('div', null, g, px({ left: 16, top: 46, width: 80, height: 12, borderRadius: 6, background: '#2a3d60' }));
+      };
+      ghost(45, 200); ghost(45, 300); ghost(345, 270); ghost(645, 200);
+      r.card = el('div', null, root, px({ left: 45, top: 90, width: 230, height: 84, borderRadius: 14, border: '2px solid ' + css('--panelLine'), background: '#22345a' }));
+      el('div', null, r.card, px({ left: 16, top: 12, fontSize: 24, fontWeight: 700, color: '#fff', whiteSpace: 'nowrap' }), 'Hartley & Co');
+      el('div', null, r.card, px({ left: 16, top: 48, fontSize: 20, fontWeight: 600, color: css('--muted') }), '£1,200');
+      r.badge = el('div', null, r.card, px({ left: 0, top: 96, padding: '8px 14px', borderRadius: 999, fontSize: 16, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase',
+        background: css('--accent'), color: '#0B1320', whiteSpace: 'nowrap', opacity: 0 }), 'Follow up: Fri');
+      r.check = el('div', null, root, px({ left: 836, top: 88, width: 44, height: 44, borderRadius: 22, background: css('--accent'), color: '#0B1320', fontWeight: 800, fontSize: 26,
+        display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0 }), '✓');
+      refs.set(root, r);
+    },
+    update(root, t) {
+      const r = refs.get(root);
+      const x = 45 + 300 * easeInOut(prog(t, 1.4, 1.0)) + 300 * easeInOut(prog(t, 4.6, 1.0));
+      r.card.style.left = x + 'px';
+      const hl = easeOut(prog(t, 5.6, 0.3));
+      r.card.style.borderColor = mix('#2C4066', '#F5A524', hl);
+      r.card.style.boxShadow = `0 0 ${Math.round(30 * hl)}px rgba(245,165,36,${(0.35 * hl).toFixed(3)})`;
+      r.badge.style.opacity = easeOut(prog(t, 2.8, 0.4)) * (1 - prog(t, 4.4, 0.2));
+      const c = easeOut(prog(t, 5.7, 0.35));
+      r.check.style.opacity = c;
+      r.check.style.transform = `scale(${lerp(0.4, 1, c)})`;
+    },
+  };
+
+  /* ---------- 7. Rezerwacje: klient wybiera wolny termin ---------- */
+  S.calendar = {
+    init(root) {
+      const r = {};
+      const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+      const busy = ['0,0', '1,1', '2,0', '3,2', '4,1', '1,0', '3,0'];
+      r.cells = {};
+      days.forEach((d, i) => {
+        el('div', null, root, px({ left: 40 + i * 170, top: 28, width: 160, textAlign: 'center', fontSize: 18, fontWeight: 700, letterSpacing: '.16em', color: css('--muted'), textTransform: 'uppercase' }), d);
+        for (let j = 0; j < 3; j++) {
+          const isBusy = busy.includes(i + ',' + j);
+          r.cells[i + ',' + j] = el('div', null, root, px({ left: 40 + i * 170, top: 66 + j * 100, width: 160, height: 88, borderRadius: 14, border: '2px solid ' + css('--panelLine'),
+            background: isBusy ? '#2a3d60' : '#16233A', opacity: isBusy ? 0.7 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 22, fontWeight: 800, color: '#0B1320', textTransform: 'uppercase', letterSpacing: '.08em' }));
+        }
+      });
+      r.target = r.cells['2,1'];
+      r.conf = el('div', null, root, px({ left: 40, top: 400, padding: '12px 22px', borderRadius: 999, border: '2px solid ' + css('--accent'), color: css('--accent'),
+        fontSize: 22, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', opacity: 0, whiteSpace: 'nowrap' }), '✓ Confirmation sent');
+      r.cursor = el('div', null, root, px({ left: 700, top: 420, width: 26, height: 26, borderRadius: 13, background: '#fff', border: '4px solid ' + css('--accent'), opacity: 0 }));
+      refs.set(root, r);
+    },
+    update(root, t) {
+      const r = refs.get(root);
+      const m = easeInOut(prog(t, 1.2, 1.6));
+      r.cursor.style.opacity = easeOut(prog(t, 0.8, 0.3)) * (1 - prog(t, 3.9, 0.25));
+      r.cursor.style.left = lerp(700, 380 + 70, m) + 'px';
+      r.cursor.style.top = lerp(420, 166 + 30, m) + 'px';
+      const hover = easeOut(prog(t, 2.8, 0.3));
+      const book = easeOut(prog(t, 3.6, 0.35));
+      r.target.style.borderColor = mix('#2C4066', '#F5A524', Math.max(hover, book));
+      r.target.style.background = mix('#16233A', '#F5A524', book);
+      r.target.textContent = book > 0.5 ? 'Booked' : '';
+      const c = easeOut(prog(t, 4.6, 0.4));
+      r.conf.style.opacity = c;
+      r.conf.style.transform = `translateY(${lerp(12, 0, c)}px)`;
+    },
+  };
+
+  /* ---------- 8. Mailing: jedna wiadomosc do wielu osob ---------- */
+  S.mail = {
+    init(root) {
+      const r = {};
+      const box = el('div', null, root, px({ left: 40, top: 50, width: 500, height: 390, borderRadius: 22, border: '2px solid ' + css('--panelLine'), background: '#1b2a45' }));
+      el('div', null, box, px({ left: 28, top: 24, fontSize: 16, fontWeight: 700, letterSpacing: '.18em', color: css('--muted'), textTransform: 'uppercase' }), 'To: 3 clients');
+      el('div', null, box, px({ left: 28, top: 58, width: 444, height: 2, background: css('--panelLine') }));
+      r.subj = el('div', null, box, px({ left: 28, top: 74, fontSize: 28, fontWeight: 700, color: '#fff', whiteSpace: 'nowrap' }), '');
+      r.lines = [380, 420, 300, 400, 220].map((w, i) => el('div', null, box, px({ left: 28, top: 140 + i * 34, width: w, height: 12, borderRadius: 6, background: '#5b6b8c', opacity: 0 })));
+      r.btn = el('div', null, box, px({ left: 28, top: 330, width: 130, height: 42, borderRadius: 12, background: css('--accent'), color: '#0B1320', fontSize: 20, fontWeight: 800,
+        letterSpacing: '.08em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'center' }), 'Send');
+      el('div', null, root, px({ left: 590, top: 50, fontSize: 16, fontWeight: 700, letterSpacing: '.18em', color: css('--muted'), textTransform: 'uppercase' }), 'Delivery');
+      r.rows = ['Sam', 'Priya', 'Jon'].map((nm, i) => {
+        const row = el('div', 'row', root, px({ left: 590, top: 92 + i * 84, width: 290, opacity: 0 }));
+        el('span', null, row, null, nm);
+        el('small', null, row, null, 'Sent ✓');
+        return row;
+      });
+      r.count = el('div', null, root, px({ left: 590, top: 380, fontSize: 30, fontWeight: 800, color: css('--muted') }), '');
+      refs.set(root, r);
+    },
+    update(root, t) {
+      const r = refs.get(root);
+      const full = 'Following up on our call';
+      r.subj.textContent = full.slice(0, Math.floor(prog(t, 0.5, 1.6) * full.length + 0.0001));
+      r.lines.forEach((l, i) => { l.style.opacity = easeOut(prog(t, 2.1 + i * 0.25, 0.3)); });
+      const press = prog(t, 3.8, 0.2) - prog(t, 4.0, 0.2);
+      r.btn.style.transform = `scale(${1 - 0.08 * press})`;
+      r.rows.forEach((row, i) => {
+        const k = easeOut(prog(t, 4.3 + i * 0.5, 0.35));
+        row.style.opacity = k;
+        row.style.transform = `translateY(${lerp(14, 0, k)}px)`;
+      });
+      const n = t >= 5.8 ? 3 : t >= 5.3 ? 2 : t >= 4.8 ? 1 : 0;
+      r.count.textContent = n ? 'Sent ' + n + '/3' : '';
+      r.count.style.color = n === 3 ? css('--accent') : css('--muted');
+    },
+  };
+
   window.SCENES = S;
 })();
