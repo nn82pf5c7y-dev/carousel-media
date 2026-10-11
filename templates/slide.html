@@ -71,6 +71,15 @@ main { position: absolute; left: 80px; right: 80px; top: 150px; bottom: 64px;
   font-size: 22px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
 .cover .foot .go { color: var(--accent); }
 
+/* hook: tytul karuzeli i pierwsze narzedzie na jednym slajdzie */
+.hook main { top: 128px; }
+.hook .hk-title { font-size: 92px; flex: none; }
+.hook .hk-rule { flex: none; width: 120px; height: 3px; border-radius: 2px; background: var(--accent); margin: 22px 0 18px; }
+.hook .tag { flex: none; margin-bottom: 12px; }
+.hook .tag .swipe { margin-left: auto; color: var(--accent); }
+.hook .hk-tool { font-size: 84px; flex: none; margin-bottom: 22px; }
+.hook .pills { margin-top: 24px; }
+
 /* cta */
 .cta main { justify-content: center; }
 .cta .h { font-size: 150px; }
@@ -151,6 +160,19 @@ main { position: absolute; left: 80px; right: 80px; top: 150px; bottom: 64px;
       main.innerHTML = `<div class="h" id="h">${parts(s.headline)}</div><div class="p" id="p">${esc(s.sub)}</div>
         <div class="foot"><span>${esc(data.brand.handle)}</span><span class="go">Save this &rarr;</span></div>`;
       fit($('#h'), 4, 150, 100, .98);
+    } else if (s.type === 'hook') {
+      main.innerHTML = `<div class="h hk-title" id="h">${parts(s.title)}</div><div class="hk-rule"></div>
+        <div class="tag"><b></b><span>${esc(s.tag)}</span><span class="swipe">Swipe &rarr;</span></div>
+        <div class="h hk-tool" id="h2">${esc(s.headline)}</div>
+        <div class="frame"><div class="dots"><i></i><i></i><i></i></div><div class="ill">Illustration</div><div class="scene" id="scene"></div></div>
+        <div class="pills">${s.pills.map((p) => `<div class="pill"><small>${esc(p.label)}</small><span>${esc(p.value)}</span></div>`).join('')}</div>`;
+      fit($('#h'), 3, 92, 64, .98);
+      fit($('#h2'), 2, 84, 50, .98);
+      ROOT = $('#scene');
+      SCENE = window.SCENES[s.scene];
+      if (!SCENE) throw new Error('Nieznana scena: ' + s.scene);
+      SCENE.init(ROOT);
+      window.__setTime(0);
     } else {
       main.innerHTML = `<div class="tag"><b></b><span>${esc(s.tag)}</span></div>
         <div class="h" id="h">${esc(s.headline)}</div>
@@ -167,16 +189,25 @@ main { position: absolute; left: 80px; right: 80px; top: 150px; bottom: 64px;
     }
 
     // kontrola przepelnien
-    const h = $('#h'), p = $('#p');
-    for (const [name, e] of [['headline', h], ['body', p]]) {
+    const h = $('#h'), p = $('#p'), h2 = $('#h2');
+    for (const [name, e] of [['headline', h], ['body', p], ['headline narzedzia', h2]]) {
       if (e && e.scrollWidth > e.clientWidth + 1) report.push(name + ': za szeroki');
     }
     const mainEl = $('#main');
     const frame = document.querySelector('.frame');
+    if (s.type === 'hook') {
+      // tytul max 3 linie, naglowek narzedzia max 2 linie, kolejne elementy nie moga na siebie nachodzic
+      if (Math.round(h.scrollHeight / (parseFloat(h.style.fontSize) * .98)) > 3) report.push('tytul: wiecej niz 3 linie');
+      if (Math.round(h2.scrollHeight / (parseFloat(h2.style.fontSize) * .98)) > 2) report.push('naglowek narzedzia: wiecej niz 2 linie');
+      const kids = [...mainEl.children];
+      for (let i = 1; i < kids.length; i++) {
+        if (kids[i].getBoundingClientRect().top < kids[i - 1].getBoundingClientRect().bottom - 1) report.push('nakladanie elementow: ' + i);
+      }
+    }
     if (frame) {
-      const pe = document.querySelector('.p').getBoundingClientRect();
+      const pEl = document.querySelector('.p');
       const fe = frame.getBoundingClientRect();
-      if (pe.bottom > fe.top - 16) report.push('body nachodzi na ramke');
+      if (pEl && pEl.getBoundingClientRect().bottom > fe.top - 16) report.push('body nachodzi na ramke');
       document.querySelectorAll('.pill').forEach((x, i) => {
         if (x.scrollWidth > x.clientWidth + 1) report.push('pill ' + i + ' za szeroki');
       });
