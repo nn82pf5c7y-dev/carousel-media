@@ -50,7 +50,9 @@ for (const s of carousel.slides) {
   const ov = state.overflow[s.n] || [];
   if (ov.length) problems.push(`slajd ${s.n}: tekst: ${ov.join('; ')}`);
   const args = isVideo ? ['-y', '-v', 'error', '-ss', '4.6', '-i', f] : ['-y', '-v', 'error', '-i', f];
-  spawnSync('ffmpeg', [...args, '-frames:v', '1', '-vf', 'scale=360:-1', path.join(thumbs, `t-${pad(s.n)}.jpg`)]);
+  // format=yuvj420p: enkoder mjpeg odrzuca wideo yuv420p z ograniczonym zakresem, a wtedy miniatura nie powstaje
+  const tr = spawnSync('ffmpeg', [...args, '-frames:v', '1', '-vf', 'scale=360:-1,format=yuvj420p', path.join(thumbs, `t-${pad(s.n)}.jpg`)], { encoding: 'utf8' });
+  if (!fs.existsSync(path.join(thumbs, `t-${pad(s.n)}.jpg`))) problems.push(`slajd ${s.n}: nie powstala miniatura do podgladu ${(tr.stderr || '').trim().split('\n')[0]}`);
 }
 
 // struktura: numeracja, ostatni slajd = CTA, alt zgodny z kolejnoscia slajdow, brak em dashy

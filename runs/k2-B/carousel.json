@@ -1,0 +1,32 @@
+{
+  "id": "k2-B",
+  "carousel": "k2",
+  "variant": "B",
+  "topic": "5 open source tools for client follow-ups in a small office",
+  "lang": "en",
+  "heading": "5 free tools so no client is left waiting.",
+  "cover_tool": "EspoCRM",
+  "tool_order": ["EspoCRM", "n8n", "Easy!Appointments", "Invoice Ninja", "listmonk"],
+  "cta_live": false,
+  "cta_note": "Slajd CTA obiecuje linki po komentarzu. Publikuj dopiero, gdy ManyChat lub Make odpowiada na slowo FOLLOWUP.",
+  "facts": [
+    {"repo": "espocrm/espocrm", "stars": 3473, "license": "AGPL-3.0", "description": "EspoCRM, Open Source CRM Application (topics: crm, kanban, leads, contacts, calendar)", "fetched": "2026-10-11"},
+    {"repo": "n8n-io/n8n", "stars": 207012, "license": "NOASSERTION (fair-code)", "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.", "fetched": "2026-10-11"},
+    {"repo": "alextselegidis/easyappointments", "stars": 4427, "license": "GPL-3.0", "description": "Easy!Appointments, Self Hosted Appointment Scheduler (topics: appointments, google-calendar, sync)", "fetched": "2026-10-11"},
+    {"repo": "invoiceninja/invoiceninja", "stars": 10262, "license": "NOASSERTION (source-available)", "description": "A source-available invoice, quote, project and time-tracking app built with Laravel", "fetched": "2026-10-11"},
+    {"repo": "knadh/listmonk", "stars": 23752, "license": "AGPL-3.0", "description": "High performance, self-hosted, newsletter and mailing list manager with a modern dashboard. Single binary app.", "fetched": "2026-10-11"}
+  ],
+  "slides": [
+    {"n": 1, "type": "hook", "scene": "pipeline", "title": [{"t": "5 free tools", "accent": true}, {"t": " so no client is left waiting."}], "tag": "EspoCRM  /  CRM", "headline": "See who needs a nudge.", "pills": [{"label": "GitHub stars", "value": "3.5K"}, {"label": "Licence", "value": "AGPL-3.0"}, {"label": "Setup", "value": "Self-host"}], "source": "https://github.com/espocrm/espocrm"},
+    {"n": 2, "type": "tool", "scene": "flow", "tag": "n8n  /  Workflow automation", "headline": "Let the reminders run themselves.", "body": "Fair-code workflow automation with 400+ integrations. Connect your tools and let the repeat steps run on their own.", "pills": [{"label": "GitHub stars", "value": "207K"}, {"label": "Licence", "value": "Fair-code"}, {"label": "Setup", "value": "Self-host or cloud"}], "source": "https://github.com/n8n-io/n8n"},
+    {"n": 3, "type": "tool", "scene": "calendar", "tag": "Easy!Appointments  /  Booking", "headline": "Let clients book themselves.", "body": "A self-hosted appointment scheduler. Clients pick a free slot and it syncs with Google Calendar.", "pills": [{"label": "GitHub stars", "value": "4.4K"}, {"label": "Licence", "value": "GPL-3.0"}, {"label": "Setup", "value": "Self-host"}], "source": "https://github.com/alextselegidis/easyappointments"},
+    {"n": 4, "type": "tool", "scene": "invoice", "tag": "Invoice Ninja  /  Quotes and invoices", "headline": "Send the quote. Send the invoice.", "body": "A source-available app for invoices, quotes, projects and time tracking.", "pills": [{"label": "GitHub stars", "value": "10.3K"}, {"label": "Licence", "value": "Source-available"}, {"label": "Setup", "value": "Self-host"}], "source": "https://github.com/invoiceninja/invoiceninja"},
+    {"n": 5, "type": "tool", "scene": "mail", "tag": "listmonk  /  Email", "headline": "One message, every client.", "body": "A self-hosted newsletter and mailing list manager with a modern dashboard. One binary to run.", "pills": [{"label": "GitHub stars", "value": "23.8K"}, {"label": "Licence", "value": "AGPL-3.0"}, {"label": "Setup", "value": "Self-host"}], "source": "https://github.com/knadh/listmonk"},
+    {"n": 6, "type": "cta", "headline": [{"t": "Comment \"FOLLOWUP\" "}, {"t": "for the links.", "accent": true}], "sub": "I will send you all five and the simplest way to try each one."}
+  ],
+  "post": {
+    "caption": "Tuesday, 9am. You told a client you would get back to them last Thursday.\nNobody forgot on purpose. There was just no system holding the follow-ups.\nHere are five open source tools that do the holding. EspoCRM shows who needs a nudge. n8n runs the repeat steps. Easy!Appointments lets clients book a slot. Invoice Ninja handles quotes and invoices. listmonk emails everyone at once.\nYou can run all five yourself. Check each licence before using one for clients.\nComment \"FOLLOWUP\" and I will send you the links.\nSave this for the next time a client goes quiet.",
+    "hashtags": "#smallbusinessuk #opensource #crm #automation #selfhosted #businessowner #clientmanagement #n8n #productivity #aitools",
+    "alt": ["Animated illustration of a deal card moving across a pipeline from Lead to Proposal to Won. Text on image: 5 free tools so no client is left waiting. See who needs a nudge. EspoCRM, 3.5K GitHub stars, AGPL-3.0. Created by Pawel Grzywaczewski thekindconcrete.com", "Animated illustration of three connected steps: New email, Save to sheet, Send reply. Text on image: Let the reminders run themselves. n8n, 207K GitHub stars, fair-code licence. Created by Pawel Grzywaczewski thekindconcrete.com", "Animated illustration of a weekly calendar where one free slot gets booked and a confirmation is sent. Text on image: Let clients book themselves. Easy!Appointments, 4.4K GitHub stars, GPL-3.0. Created by Pawel Grzywaczewski thekindconcrete.com", "Animated illustration of an invoice being totalled and stamped paid. Text on image: Send the quote. Send the invoice. Invoice Ninja, 10.3K GitHub stars, source-available. Created by Pawel Grzywaczewski thekindconcrete.com", "Animated illustration of one email being written and sent to three clients. Text on image: One message, every client. listmonk, 23.8K GitHub stars, AGPL-3.0. Created by Pawel Grzywaczewski thekindconcrete.com", "Call to action slide: Comment FOLLOWUP for the links. Created by Pawel Grzywaczewski thekindconcrete.com"]
+  }
+}

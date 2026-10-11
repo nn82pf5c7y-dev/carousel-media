@@ -1,0 +1,32 @@
+{
+  "id": "k1-C",
+  "carousel": "k1",
+  "variant": "C",
+  "topic": "5 free open source tools for a small office drowning in paperwork",
+  "lang": "en",
+  "heading": "5 free tools that take paperwork off a small office.",
+  "cover_tool": "n8n",
+  "tool_order": ["n8n", "Paperless-ngx", "Invoice Ninja", "Whisper", "Documenso"],
+  "cta_live": false,
+  "cta_note": "Slajd CTA obiecuje linki po komentarzu. Publikuj dopiero, gdy ManyChat lub Make odpowiada na slowo TOOLS.",
+  "facts": [
+    {"repo": "n8n-io/n8n", "stars": 207012, "license": "NOASSERTION (fair-code)", "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.", "fetched": "2026-10-11"},
+    {"repo": "paperless-ngx/paperless-ngx", "stars": 46519, "license": "GPL-3.0", "description": "A community-supported supercharged document management system: scan, index and archive all your documents", "fetched": "2026-10-11"},
+    {"repo": "invoiceninja/invoiceninja", "stars": 10262, "license": "NOASSERTION (source-available)", "description": "A source-available invoice, quote, project and time-tracking app built with Laravel", "fetched": "2026-10-11"},
+    {"repo": "openai/whisper", "stars": 110328, "license": "MIT", "description": "Robust Speech Recognition via Large-Scale Weak Supervision", "fetched": "2026-10-11"},
+    {"repo": "documenso/documenso", "stars": 15389, "license": "AGPL-3.0", "description": "The Open Source DocuSign Alternative.", "fetched": "2026-10-11"}
+  ],
+  "slides": [
+    {"n": 1, "type": "hook", "scene": "flow", "title": [{"t": "5 free tools", "accent": true}, {"t": " that take paperwork off a small office."}], "tag": "n8n  /  Workflow automation", "headline": "Stop copying data between apps.", "pills": [{"label": "GitHub stars", "value": "207K"}, {"label": "Licence", "value": "Fair-code"}, {"label": "Setup", "value": "Self-host or cloud"}], "source": "https://github.com/n8n-io/n8n"},
+    {"n": 2, "type": "tool", "scene": "paper", "tag": "Paperless-ngx  /  Documents", "headline": "Scan it once. Find it forever.", "body": "A document management system that scans, indexes and archives your paperwork, with OCR so you can search it.", "pills": [{"label": "GitHub stars", "value": "46.5K"}, {"label": "Licence", "value": "GPL-3.0"}, {"label": "Setup", "value": "Self-host"}], "source": "https://github.com/paperless-ngx/paperless-ngx"},
+    {"n": 3, "type": "tool", "scene": "invoice", "tag": "Invoice Ninja  /  Invoicing", "headline": "Invoices, quotes and time in one place.", "body": "A source-available app for invoices, quotes, projects and time tracking.", "pills": [{"label": "GitHub stars", "value": "10.3K"}, {"label": "Licence", "value": "Source-available"}, {"label": "Setup", "value": "Self-host"}], "source": "https://github.com/invoiceninja/invoiceninja"},
+    {"n": 4, "type": "tool", "scene": "wave", "tag": "Whisper  /  Speech to text", "headline": "Turn meetings into text.", "body": "OpenAI's open speech recognition model. Give it a recording and get a transcript back.", "pills": [{"label": "GitHub stars", "value": "110K"}, {"label": "Licence", "value": "MIT"}, {"label": "Setup", "value": "Runs on your machine"}], "source": "https://github.com/openai/whisper"},
+    {"n": 5, "type": "tool", "scene": "sign", "tag": "Documenso  /  E-signatures", "headline": "Send contracts to sign.", "body": "The open source DocuSign alternative. Upload a PDF, send it out and collect signatures.", "pills": [{"label": "GitHub stars", "value": "15.4K"}, {"label": "Licence", "value": "AGPL-3.0"}, {"label": "Setup", "value": "Self-host"}], "source": "https://github.com/documenso/documenso"},
+    {"n": 6, "type": "cta", "headline": [{"t": "Comment \"TOOLS\" "}, {"t": "for the links.", "accent": true}], "sub": "I will send you all five and the simplest way to try each one."}
+  ],
+  "post": {
+    "caption": "Friday, 4:40pm. The office manager is renaming scanned PDFs, retyping the same details into a second app and chasing one last signature.\nNobody is slacking. The right tools are just missing.\nHere are five open source ones that take that work off a small office. n8n connects your apps. Paperless-ngx finds any document. Invoice Ninja handles invoices and quotes. Whisper turns recordings into text. Documenso collects signatures.\nYou can run all five yourself. Check each licence before using one for clients.\nComment \"TOOLS\" and I will send you the links.\nSave this for the next time paperwork wins.",
+    "hashtags": "#smallbusinessuk #opensource #AIworkflow #automation #selfhosted #businessowner #paperwork #n8n #productivity #aitools",
+    "alt": ["Animated illustration of three connected steps: New email, Save to sheet, Send reply. Text on image: 5 free tools that take paperwork off a small office. Stop copying data between apps. n8n, 207K GitHub stars, fair-code licence. Created by Pawel Grzywaczewski thekindconcrete.com", "Animated illustration of a scanned document being indexed and found by search. Text on image: Scan it once. Find it forever. Paperless-ngx, 46.5K GitHub stars, GPL-3.0. Created by Pawel Grzywaczewski thekindconcrete.com", "Animated illustration of an invoice being totalled and stamped paid. Text on image: Invoices, quotes and time in one place. Invoice Ninja, 10.3K GitHub stars, source-available. Created by Pawel Grzywaczewski thekindconcrete.com", "Animated illustration of a sound wave turning into a text transcript. Text on image: Turn meetings into text. Whisper, 110K GitHub stars, MIT. Created by Pawel Grzywaczewski thekindconcrete.com", "Animated illustration of a contract being signed. Text on image: Send contracts to sign. Documenso, 15.4K GitHub stars, AGPL-3.0. Created by Pawel Grzywaczewski thekindconcrete.com", "Call to action slide: Comment TOOLS for the links. Created by Pawel Grzywaczewski thekindconcrete.com"]
+  }
+}
